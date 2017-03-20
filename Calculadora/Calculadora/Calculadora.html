@@ -10,46 +10,13 @@
 		<script src="misFunciones.js"></script>
 	</head>
 	
-	<body onload="agregarEvento();">
+	<body>
 		<div id="caja" class="center">
-			<h1>Calculadora</h1>
-			
-			<div id="result">
-				<input type="text" id="Operacion" placeholder="0">
-				<label id="resp"></label>
-			</div>
-			
-			<div class="floating-box" id="botones1"> 
-				<input type="button" value="7" class="boton" >
-				<input type="button" value="8" class="boton" >
-				<input type="button" value="9" class="boton" >
-				<input type="button" value="DEL" class="boton" >
-				<input type="button" value="AC" class="boton" > 
-			</div>
-			
-			<div class="floating-box" id="botones2"> 
-				<input type="button" value="4" class="boton" >
-				<input type="button" value="5" class="boton" >
-				<input type="button" value="6" class="boton" >
-				<input type="button" value=" x " class="boton" >
-				<input type="button" value=" &divide; " class="boton">
-			</div>
-			
-			<div class="floating-box" id="botones3"> 
-				<input type="button" value="1" class="boton" >
-				<input type="button" value="2" class="boton" >
-				<input type="button" value="3" class="boton" >
-				<input type="button" value=" + " class="boton" >
-				<input type="button" value=" - " class="boton" >
-			</div>
-			
-			<div class="floating-box" id="botones4"> 
-				<input type="button" value="0" class="boton" >
-				<input type="button" value="." class="boton" >
-				<input type="button" value="10x" class="boton" >
-				<input type="button" value="ANS" class="boton" >
-				<input type="button" value=" = " class="boton" onclick="resultado();">
-			</div>
+			<h2>Numero de rejillas</h2>
+			<input type="text" id="numRej" onkeydown="eventoEnter( event )">
+			<input type="button" id="boton" value="crearRejilla" onclick="crearRejilla()">
+	
+			<div id="rejilla" class="center"></div>
 		</div>
 		
 		<i class="fa fa-spinner fa-spin"></i>

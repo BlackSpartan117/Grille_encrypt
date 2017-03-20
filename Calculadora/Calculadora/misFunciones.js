@@ -1,122 +1,51 @@
-
-function resultado() {
-	var operacionUsuario = document.getElementById("Operacion").value;
-	var numerosYoperandos = operacionUsuario.split(" ");
+function crearRejilla() {
+	var numRejillas = document.getElementById("numRej").value;
+	document.getElementById("rejilla").innerHTML = "";
 	
-	numerosYoperandos = realizarOperaciones( numerosYoperandos, "x", "÷" );
-	if( numerosYoperandos === "MAL" ) {
-		numerosYoperandos = "SYNTAXIS ERROR";
-	} else {
-		numerosYoperandos = realizarOperaciones( numerosYoperandos, "+", "-" );
-	}
-	
-	document.getElementById("resp").innerHTML = numerosYoperandos;
-	document.getElementById("resp").style.display = "block";
-}
-
-function realizarOperaciones( numerosYoperandos, oper1, oper2  ) {
-	var num1, num2, operando, resultado;
-	var n = numerosYoperandos.length;
-	
-	for( var i = 0; i < numerosYoperandos.length; i++ ) {
-		if( numerosYoperandos[i] == oper1 || numerosYoperandos[i] == oper2 ) { //isNan( NaN ) == true 
-			if( i - 1 >= 0 && i + 1 < numerosYoperandos.length ) {
-				num1 = parseFloat( numerosYoperandos[i-1] );
-				num2 = parseFloat( numerosYoperandos[i+1] );
-				
-				if( !isNaN( num1 ) && !isNaN( num2 ) ) {
-					if( numerosYoperandos[i] == "x" ) {
-						resultado = num1 * num2;
-					} else if( numerosYoperandos[i] == "÷" ) {
-						resultado = num1 / num2;
-					} else if( numerosYoperandos[i] == "+" ) {
-						resultado = num1 + num2;
-					} else if( numerosYoperandos[i] == "-" ) {
-						resultado = num1 - num2;
-					}
-				} else {
-					return "MAL";
-				}
-				
-				numerosYoperandos = reacomodarArreglo( numerosYoperandos, i, resultado );
-				n = numerosYoperandos.length;
-				i = 0;
-			}
-		}
-	}
-	
-	return numerosYoperandos;
-}
-
-function reacomodarArreglo( array, index, valor ) {
-	var arrayAux = [];
-	
-	for( var i = 0; i < array.length; i++ ) {
-		if( i != index - 1 ) {
-			arrayAux.push( array[i] );
-		} else {
-			arrayAux.push( valor );
-			i += 2;
-		}
-	}
-	
-	return arrayAux;
-}
-
-function agregarValorTecla( id ) {
-	var valorTecla = id.value;
-	var pantalla = document.getElementById("Operacion").value;
-	
-	if( valorTecla != "10x" )  {
-		pantalla += valorTecla;
-	} else {
-		pantalla += "x";
-		pantalla += valorTecla;
-	}
-	
-	document.getElementById("Operacion").value = pantalla;
-}
-
-function limpiar( id ) {
-	var opcion = id.value;
-	var pantalla = document.getElementById("Operacion").value;
-	
-	if( opcion == "AC" ) {
-		document.getElementById("Operacion").value = "";
-	} else {
-		if( pantalla.substr( pantalla.length - 3, pantalla.length ) == "10x" ) {
-			pantalla = pantalla.substr( 0, pantalla.length - 3 );
-			document.getElementById("Operacion").value = pantalla;
-		} else {
-			pantalla = pantalla.substr( 0, pantalla.length - 1 );
-			document.getElementById("Operacion").value = pantalla;
-		}
-	}
-	
-	document.getElementById("resp").style.display = "none";
-}
-
-function agregarEvento() {
-	var botones = "botones";
-	var nodos;
-	var numNodos;
-	
-	for( var j = 1; j <= 4; j++ ) {
-		botones += j;
-		nodos = document.getElementById( botones ).children;
-		numNodos = nodos.length;
-		botones = botones.substr( 0, botones.length - 1 );
+	if( numRejillas < 0 || numRejillas == "" || Number(numRejillas).toString() == "NaN" ) {
+		alert("Numero de rejillas no valido");
 		
-		for( var i = 0; i < numNodos; i++ ) {
-			if( j != 4 ) {
-				if( j == 1 && i >= numNodos - 2 ) {
-					nodos[i].setAttribute("onclick", "limpiar( this )" );
-				} else {
-					nodos[i].setAttribute("onclick", "agregarValorTecla( this )" );
-				}
-			} else if( i < numNodos - 1 ) {
-				nodos[i].setAttribute("onclick", "agregarValorTecla( this )" );
-			}
+		return;
+	}
+	
+	var tabla = document.createElement("table");
+	var tbody = document.createElement("tbody");
+	var fila, boton;
+	
+	for( var i = 0; i < numRejillas; i++ ) {
+		fila = document.createElement("tr");
+		
+		for( var j = 0; j < numRejillas; j++ ) {
+			col = document.createElement("td");
+			boton = document.createElement("input");
+			boton.setAttribute("type", "button");
+			boton.addEventListener("click", cambiarColorBorde );
+			
+			col.appendChild( boton );
+			fila.appendChild( col );
 		}
+		
+		tbody.appendChild( fila );
+	}
+	
+	tabla.setAttribute("boder", "2");
+	tabla.setAttribute("class", "center");
+	tabla.appendChild( tbody );
+	
+	document.getElementById("rejilla").appendChild( tabla );
+}
+
+function cambiarColorBorde() {
+	if( this.style.borderColor == "rgb(0, 255, 64)" ) {
+		this.removeAttribute("style");
+	} else {
+		this.style.borderColor = "#00ff40";
 	}
 }
+
+function eventoEnter( event ) {
+	if( event.key == "Enter" ) {
+		crearRejilla();
+	}
+}
+

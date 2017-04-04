@@ -2,7 +2,7 @@ function crearRejilla() {
 	var numRejillas = document.getElementById("numRej").value;
 	document.getElementById("rejilla").innerHTML = "";
 	
-	if( numRejillas < 0 || numRejillas == "" || Number(numRejillas).toString() == "NaN" ) {
+	if( !( numRejillas > 5 && numRejillas < 17 ) || numRejillas == "" || Number(numRejillas).toString() == "NaN" ) {
 		alert("Numero de rejillas no valido");
 		
 		return;
@@ -43,9 +43,29 @@ function cambiarColorBorde() {
 	}
 }
 
+function escribirMensaje() {
+	var rejilla = document.getElementById("rejilla");
+	
+	alert( rejilla );
+}
+
 function eventoEnter( event ) {
 	if( event.key == "Enter" ) {
 		crearRejilla();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

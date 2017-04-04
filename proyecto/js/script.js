@@ -1,11 +1,13 @@
-function crearRejilla(tam){
+function crearRejilla( tam ){
     var indices = [];
+    
     for(i = 0; i < tam; i++){
         indices[i] = [];
         for(j = 0; j < tam; j++){
             indices[i][j] = j;
         }
     }
+    
     for(m = 1; m < 5; m++){
         contador = 1;
         for(i = 0; i < tam/2; i++){
@@ -27,13 +29,17 @@ function crearRejilla(tam){
             }
         }
     }
+    
     $('#rejilla').html('');
-    for(i = 0; i < tam; i++){
-        $('#rejilla').append('<tr>');
+    
+    for(i = 0; i < tam; i++) {
+        var fila = $("<tr>", { "id": i+1 } );
+        
         for(j = 0; j < tam; j++){
-            $('#rejilla').append("<td data-id=" + indices[i][j] + " class=''>" + indices[i][j] + "</td>");
+            fila.append("<td data-id=" + indices[i][j] + " class=''>" + indices[i][j] + "</td>");
         }
-        $('#rejilla').append('</tr>');
+        
+        $('#rejilla').append( fila );
     }
 }
 
@@ -41,6 +47,100 @@ crearRejilla(4);
 new APP.fleissner(".key.grille");
 
 $('#dimension').change(function(){
-    crearRejilla($(this).val());
-new APP.fleissner(".key.grille");
+    crearRejilla( $(this).val() );
+	new APP.fleissner(".key.grille");
 });
+
+
+$("#rotarD").click( function() {
+	var tabla = $("#rejilla").children(); /* Retorna los primeros hijos de la etiqueta tbody */
+	var trow, tcol, fila;
+	var tbody = $("<tbody>", {"id": "rejilla"} );
+	
+	for( var j = 0, index = 1; j < tabla.length; j++, index++ ) {
+		fila = $("<tr>", { "id": index } );
+		
+		for( var i = tabla.length; i > 0; i-- ) {
+			trow = $("#" + i ).children();
+			tcol = trow.toArray();
+			
+			fila.append("<td data-id=" + tcol[j].getAttribute("data-id") + 
+			" class='" + tcol[j].getAttribute("class") + "'>" + tcol[j].innerHTML + "</td>");
+		}
+		
+		tbody.append( fila );
+	}
+	
+	var tabs = $("#rejilla").parent();
+	$("#rejilla").remove();
+	tabs.append( tbody );
+	
+} );
+
+$("#rotarI").click( function() {
+	var tabla = $("#rejilla").children();
+	var trow, tcol, fila;
+	var tbody = $("<tbody>", {"id": "rejilla"} );
+	
+	for( var j = tabla.length - 1, index = 1; j >= 0; j--, index++ ) {
+		fila = $("<tr>", { "id": index } );
+		
+		for( var i = 1; i <= tabla.length; i++ ) {
+			trow = $("#" + i ).children();
+			tcol = trow.toArray();
+			
+			fila.append("<td data-id=" + tcol[j].getAttribute("data-id") + 
+			" class='" + tcol[j].getAttribute("class") + "'>" + tcol[j].innerHTML + "</td>");
+		}
+		
+		tbody.append( fila );
+	}
+	
+	var tabs = $("#rejilla").parent();
+	$("#rejilla").remove();
+	tabs.append( tbody );
+	
+} );
+
+$("#mensaje").click( function() {
+	var tabla = $("#rejilla").children();
+	var trow, tcol;
+	var inputs = $("<input>", { "class" : "x", "type": "text" } );
+	var inp;
+	
+	for( var i = 1; i <= tabla.length; i++ ) {
+		trow = $("#" + i ).children();
+		tcol = trow.toArray();
+		
+		for( var j = 0; j < tcol.length; j++ ) {
+			if( tcol[j].getAttribute("class") === "X" ) {
+				inp = document.createElement("input");
+				inp.setAttribute("type", "text");
+				inp.setAttribute("class", "X");
+				inp.setAttribute("style", "width: 100%; height:100%;");
+				tcol[j].removeChild( tcol[j].childNodes[0] );
+				tcol[j].removeAttribute("class");
+				tcol[j].appendChild( inp );
+			}
+		}
+	}
+		
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

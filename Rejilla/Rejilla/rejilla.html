@@ -13,10 +13,10 @@
 	<body>
 		<div id="caja" class="center">
 			<h2>Numero de rejillas</h2>
-			<input type="text" id="numRej" onkeydown="eventoEnter( event )">
-			<input type="button" id="boton" value="crearRejilla" onclick="crearRejilla()">
-	
+			<input type="number" id="numRej" min="6" max="16" step="2" onkeydown="eventoEnter( event )">
+			<input type="button" class="buton" id="boton" value="crearRejilla" onclick="crearRejilla()">
 			<div id="rejilla" class="center"></div>
+			<input type="button" class="buton" id="mensaje" value="escribir mensaje" onclick="escribirMensaje()">
 		</div>
 		
 		<i class="fa fa-spinner fa-spin"></i>

@@ -2,14 +2,14 @@
 <!-- saved from url=(0041)http://www.scytale.xyz/ciphers/fleissner/ -->
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
     <title>Fleissner Grille</title>
     <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css"></link>
     
-    <!-- Font awesome --  biblioteca de iconos -->
-    <link rel="stylesheet" type="text/css" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" media="all" href="css/main.css">
+    <!-- Font awesome biblioteca de iconos -->
+    <link rel="stylesheet" type="text/css" href="css/font-awesome-4.6.3/css/font-awesome.min.css"></link>
+    <link rel="stylesheet" type="text/css" media="all" href="css/main.css"></link>
 </head>
 <body class="cipher fleissner">
 <div class="wrapper">
@@ -26,92 +26,34 @@
                 </select>
             </div>
             <label>Selecciona una vez cada n&uacute;mero</label>
-            <table>
-                <tbody id="rejilla">
-                <!--
-                <tr>
-                    <td data-id="1" class="">1</td>
-                    <td data-id="2" class="">2</td>
-                    <td data-id="3" class="">3</td>
-                    <td data-id="4" class="">4</td>
-                    <td data-id="13" class="">13</td>
-                    <td data-id="9" class="">9</td>
-                    <td data-id="5" class="">5</td>
-                    <td data-id="1" class="">1</td>
-                </tr>
-                <tr>
-                    <td data-id="5" class="">5</td>
-                    <td data-id="6" class="">6</td>
-                    <td data-id="7" class="">7</td>
-                    <td data-id="8" class="">8</td>
-                    <td data-id="14" class="">14</td>
-                    <td data-id="10" class="">10</td>
-                    <td data-id="6" class="">6</td>
-                    <td data-id="2" class="">2</td>
-                </tr>
-                <tr>
-                    <td data-id="9" class="">9</td>
-                    <td data-id="10" class="">10</td>
-                    <td data-id="11" class="">11</td>
-                    <td data-id="12" class="">12</td>
-                    <td data-id="15" class="">15</td>
-                    <td data-id="11" class="">11</td>
-                    <td data-id="7" class="">7</td>
-                    <td data-id="3" class="">3</td>
-                </tr>
-                <tr>
-                    <td data-id="13" class="">13</td>
-                    <td data-id="14" class="">14</td>
-                    <td data-id="15" class="">15</td>
-                    <td data-id="16" class="">16</td>
-                    <td data-id="16" class="">16</td>
-                    <td data-id="12" class="">12</td>
-                    <td data-id="8" class="">8</td>
-                    <td data-id="4" class="">4</td>
-                </tr>
-                <tr>
-                    <td data-id="4" class="">4</td>
-                    <td data-id="8" class="">8</td>
-                    <td data-id="12" class="">12</td>
-                    <td data-id="16" class="">16</td>
-                    <td data-id="16" class="">16</td>
-                    <td data-id="15" class="">15</td>
-                    <td data-id="14" class="">14</td>
-                    <td data-id="13" class="">13</td>
-                </tr>
-                <tr>
-                    <td data-id="3" class="">3</td>
-                    <td data-id="7" class="">7</td>
-                    <td data-id="11" class="">11</td>
-                    <td data-id="15" class="">15</td>
-                    <td data-id="12" class="">12</td>
-                    <td data-id="11" class="">11</td>
-                    <td data-id="10" class="">10</td>
-                    <td data-id="9" class="">9</td>
-                </tr>
-                <tr>
-                    <td data-id="2" class="">2</td>
-                    <td data-id="6" class="">6</td>
-                    <td data-id="10" class="">10</td>
-                    <td data-id="14" class="">14</td>
-                    <td data-id="8" class="">8</td>
-                    <td data-id="7" class="">7</td>
-                    <td data-id="6" class="">6</td>
-                    <td data-id="5" class="">5</td>
-                </tr>
-                <tr>
-                    <td data-id="1" class="">1</td>
-                    <td data-id="5" class="">5</td>
-                    <td data-id="9" class="">9</td>
-                    <td data-id="13" class="">13</td>
-                    <td data-id="4" class="">4</td>
-                    <td data-id="3" class="">3</td>
-                    <td data-id="2" class="">2</td>
-                    <td data-id="1" class="">1</td>
-                </tr>
-                -->
-                </tbody>
-            </table>
+
+            <div class="row">
+				<div class="col-sm-3">
+					<button id="rotarI">rotar <i class="fa fa-rotate-left"></i></button>
+				</div>
+            	
+            	<div class="col-sm-6">
+            		<table>
+    	            	<tbody id="rejilla">
+    	            
+    	            	</tbody>
+		            </table>
+            	</div>
+            	
+    	        <div class="col-sm-3">
+					<button id="rotarD">rotar <i class="fa fa-rotate-right"></i></button>
+    	       	</div>
+            </div>    
+            
+            <div class="row">
+				<div class="content">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						<button id="mensaje">Escribir mensaje <i class="fa fa-file-text-o"></i></button>
+					</div>
+					<div class="col-sm-3"></div>
+				</div>
+			</div>
             <div class="key">
                 <label>Llave</label>
                 <pre></pre>
@@ -127,3 +69,4 @@
 <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
+

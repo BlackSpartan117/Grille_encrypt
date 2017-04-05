@@ -124,7 +124,6 @@ $("#mensaje").click( function() {
 			}
 		}
 	}
-		
 });
 
 

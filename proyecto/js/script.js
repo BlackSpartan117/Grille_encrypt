@@ -57,51 +57,51 @@ $('#dimension').change(function(){
 
 
 $("#rotarD").click( function() {
-	var tabla = $("#rejilla").children(); /* Retorna los primeros hijos de la etiqueta tbody */
+	var tabla = $("#rejilla-mensaje").children(); /* Retorna los primeros hijos de la etiqueta tbody */
 	var trow, tcol, fila;
-	var tbody = $("<tbody>", {"id": "rejilla"} );
+	var tbody = $("<tbody>", {"id": "rejilla-mensaje", "align": "center" } );
 	
 	for( var j = 0, index = 1; j < tabla.length; j++, index++ ) {
-		fila = $("<tr>", { "id": index } );
+		fila = $("<tr>", { "id": "e" + index } );
 		
-		for( var i = tabla.length; i > 0; i-- ) {
-			trow = $("#" + i ).children();
+		for( var i = tabla.length, pos = 1; i > 0; i--, pos++ ) {
+			trow = $("#e" + i ).children();
 			tcol = trow.toArray();
 			
-			fila.append("<td data-id=" + tcol[j].getAttribute("data-id") + 
-			" class='" + tcol[j].getAttribute("class") + "'>" + tcol[j].innerHTML + "</td>");
+			fila.append("<td data-id='" + tcol[j].getAttribute("data-id") + 
+			"' " + "pos = '" +  pos + "' style='" + tcol[j].getAttribute("style") + "'>" + tcol[j].innerHTML + "</td>");
 		}
 		
 		tbody.append( fila );
 	}
 	
-	var tabs = $("#rejilla").parent();
-	$("#rejilla").remove();
+	var tabs = $("#rejilla-mensaje").parent();
+	$("#rejilla-mensaje").remove();
 	tabs.append( tbody );
 	
 } );
 
 $("#rotarI").click( function() {
-	var tabla = $("#rejilla").children();
+	var tabla = $("#rejilla-mensaje").children();
 	var trow, tcol, fila;
-	var tbody = $("<tbody>", {"id": "rejilla"} );
+	var tbody = $("<tbody>", {"id": "rejilla-mensaje", "align": "center" } );
 	
 	for( var j = tabla.length - 1, index = 1; j >= 0; j--, index++ ) {
-		fila = $("<tr>", { "id": index } );
+		fila = $("<tr>", { "id": "e" + index } );
 		
 		for( var i = 1; i <= tabla.length; i++ ) {
-			trow = $("#" + i ).children();
+			trow = $("#e" + i ).children();
 			tcol = trow.toArray();
 			
-			fila.append("<td data-id=" + tcol[j].getAttribute("data-id") + 
-			" class='" + tcol[j].getAttribute("class") + "'>" + tcol[j].innerHTML + "</td>");
+			fila.append("<td data-id='" + tcol[j].getAttribute("data-id") + 
+			"' " + "pos = '" + i + "' style= '" + tcol[j].getAttribute("style") + "'>" + tcol[j].innerHTML + "</td>");
 		}
 		
 		tbody.append( fila );
 	}
 	
-	var tabs = $("#rejilla").parent();
-	$("#rejilla").remove();
+	var tabs = $("#rejilla-mensaje").parent();
+	$("#rejilla-mensaje").remove();
 	tabs.append( tbody );
 	
 } );
@@ -119,24 +119,68 @@ $("#mensaje").click( function() {
 		tcol = trow.toArray();
         etrow = document.createElement("tr");
         etrow.setAttribute('id', 'e' + i);
+        
 		for( var j = 0; j < tcol.length; j++ ) {
             var id = tcol[j].getAttribute('data-id');
             etcol = document.createElement('td');
             etcol.setAttribute('data-id', id);
+            etcol.setAttribute("pos", j + 1 );
             etcol.setAttribute('style', 'background-color:#2C3B63;');
+			
 			if( tcol[j].getAttribute("class") === "X" ) {
 				inp = document.createElement("input");
 				inp.setAttribute("type", "text");
 				inp.setAttribute("class", "X");
 				inp.setAttribute("style", "width: 100%; height:33px; margin: 0 0 0 0;");
                 inp.setAttribute("maxlength", '1');
+                inp.setAttribute("onblur", "val( this )");
 				etcol.appendChild( inp );
 			}
+			
             etrow.appendChild(etcol);
             $('#rejilla-mensaje').append(etrow);
 		}
 	}
+	
+	crearTablaCifrado();
 });
+
+function val( id ) {
+	var posCol = id.parentNode.getAttribute("pos");
+	var idFil = id.parentNode.parentNode.getAttribute("id");
+	
+	idFil = idFil.replace( "e", "c" );
+	var cipherRow = document.getElementById( idFil );
+	var cipherCol = cipherRow.children;
+	
+	cipherCol[posCol - 1].innerHTML = id.value;
+}
+
+function crearTablaCifrado() {
+    $('#cifrado').html('');
+    var tabla = $("#rejilla").children();
+	var trow, tcol;
+	var lbl;
+    var etrow, etcol;
+	
+	for( var i = 1; i <= tabla.length; i++ ) {
+		trow = $("#" + i ).children();
+		tcol = trow.toArray();
+        etrow = document.createElement("tr");
+        etrow.setAttribute('id', 'c' + i);
+        
+		for( var j = 0; j < tcol.length; j++ ) {
+            var id = tcol[j].getAttribute('data-id');
+            etcol = document.createElement('td');
+            etcol.setAttribute('data-id', id);
+			lbl = document.createElement("label");
+			etcol.append( lbl );
+			
+            etrow.appendChild(etcol);
+            $('#cifrado').append(etrow);
+		}
+	}
+}
 
 
 

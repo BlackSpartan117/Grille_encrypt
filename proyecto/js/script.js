@@ -1,3 +1,9 @@
+/*Dibujar la rejilla de tamanio 4*/
+crearRejilla(4);
+new APP.fleissner(".key.grille");
+
+/*Funcion para dibujar la rejilla dado el tamanio*/
+
 function crearRejilla( tam ){
     var indices = [];
     
@@ -33,7 +39,7 @@ function crearRejilla( tam ){
     $('#rejilla').html('');
     
     for(i = 0; i < tam; i++) {
-        var fila = $("<tr>", { "id": i+1 } );
+        var fila  = $("<tr>", { "id": i+1 } );
         
         for(j = 0; j < tam; j++){
             fila.append("<td data-id=" + indices[i][j] + " class=''>" + indices[i][j] + "</td>");
@@ -43,9 +49,7 @@ function crearRejilla( tam ){
     }
 }
 
-crearRejilla(4);
-new APP.fleissner(".key.grille");
-
+/*Evento cuando se cambia el tamanio de la rejilla*/
 $('#dimension').change(function(){
     crearRejilla( $(this).val() );
 	new APP.fleissner(".key.grille");
@@ -103,25 +107,32 @@ $("#rotarI").click( function() {
 } );
 
 $("#mensaje").click( function() {
-	var tabla = $("#rejilla").children();
+    $('#rejilla-mensaje').html('');
+    var tabla = $("#rejilla").children();
 	var trow, tcol;
 	var inputs = $("<input>", { "class" : "x", "type": "text" } );
 	var inp;
+    var etrow, etcol;
 	
 	for( var i = 1; i <= tabla.length; i++ ) {
 		trow = $("#" + i ).children();
 		tcol = trow.toArray();
-		
+        etrow = document.createElement("tr");
+        etrow.setAttribute('id', 'e' + i);
 		for( var j = 0; j < tcol.length; j++ ) {
+            var id = tcol[j].getAttribute('data-id');
+            etcol = document.createElement('td');
+            etcol.setAttribute('data-id', id);
+            etcol.setAttribute('style', 'background-color:#2C3B63;');
 			if( tcol[j].getAttribute("class") === "X" ) {
 				inp = document.createElement("input");
 				inp.setAttribute("type", "text");
 				inp.setAttribute("class", "X");
-				inp.setAttribute("style", "width: 100%; height:100%;");
-				tcol[j].removeChild( tcol[j].childNodes[0] );
-				tcol[j].removeAttribute("class");
-				tcol[j].appendChild( inp );
+				inp.setAttribute("style", "width: 100%; height:33px; margin: 0 0 0 0;");
+				etcol.appendChild( inp );
 			}
+            etrow.appendChild(etcol);
+            $('#rejilla-mensaje').append(etrow);
 		}
 	}
 		

@@ -10,6 +10,15 @@
     <!-- Font awesome biblioteca de iconos -->
     <link rel="stylesheet" type="text/css" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" media="all" href="css/main.css">
+    
+    <style>
+        td, th {
+            border: 1px solid black;
+        }
+        
+        tr {display: block; }
+        th, td { width: 33px; height: 33px; padding: 0 0 0 0;}
+    </style>
 </head>
 <body class="cipher fleissner">
 <div class="container">
@@ -50,19 +59,23 @@
             <legend>
                 <h3>Cifra tu mensaje</h3>
             </legend>
+            <div class="content">
+               <h3>Escribe una letra del mensaje en cada espacio, de izquierda a derecha, de arriba a abajo</h3>
+                <div class="col-sm-6">
+                    <button id="mensaje">Escribir mensaje <i class="fa fa-file-text-o"></i></button>
+                </div>
+            </div><br>
             <div class="row">
-               <div class="col-sm-3">
+               <div class="col-sm-3" align='center'>
                     <button id="rotarI">rotar <i class="fa fa-rotate-left"></i></button>
                 </div>
-                <div class="col-sm-3">
+                <table class="col-sm-4">
+                    <tbody id="rejilla-mensaje" align="center">
+
+                    </tbody>
+                </table>
+                <div class="col-sm-3" align="right" align='center'>
                     <button id="rotarD">rotar <i class="fa fa-rotate-right"></i></button>
-                </div>
-                <div class="content">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-6">
-                        <button id="mensaje">Escribir mensaje <i class="fa fa-file-text-o"></i></button>
-                    </div>
-                    <div class="col-sm-3"></div>
                 </div>
             </div>
         </fieldset>

@@ -184,7 +184,6 @@ $("#finalizar").click( function() {
 	var trow, tcol;
 	var car;
 	
-	alert("POS SIS ENTRA");
 	/*CONTINUAR EL RELLENADO DE LA TABLA  */
 	for( var i = 1; i <= tabla.length; i++ ) {
 		trow = $("#c" + i ).children();

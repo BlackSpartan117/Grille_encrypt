@@ -2,63 +2,83 @@
 <!-- saved from url=(0041)http://www.scytale.xyz/ciphers/fleissner/ -->
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Fleissner Grille</title>
     <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     
     <!-- Font awesome biblioteca de iconos -->
-    <link rel="stylesheet" type="text/css" href="css/font-awesome-4.6.3/css/font-awesome.min.css"></link>
-    <link rel="stylesheet" type="text/css" media="all" href="css/main.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/main.css">
+    
+    <style>
+        td, th {
+            border: 1px solid black;
+        }
+        
+        tr {display: block; }
+        th, td { width: 33px; height: 33px; padding: 0 0 0 0;}
+    </style>
 </head>
 <body class="cipher fleissner">
-<div class="wrapper">
-    <div id="content">
+<div class="container">
+    <div id="content" class="row" style="width: 100vw;">
         <h2>Fleissner Grille Cipher</h2>
-        <div class="key grille">
-            <div class="form-group">
-                <label for="dimension">Elige el tama&ntilde;o de la rejilla (n x n)</label>
-                <select class="form-control" id="dimension">
-                  <option>4</option>
-                  <option>6</option>
-                  <option>8</option>
-                  <option>10</option>
-                </select>
-            </div>
-            <label>Selecciona una vez cada n&uacute;mero</label>
+        <fieldset class="form-group">
+            <legend>
+                <h3>Generaci&oacute;n de la rejilla</h3>
+            </legend>
+            <div class="key grille">
+                <div class="form-group col-md-4">
+                    <label for="dimension">Elige el tama&ntilde;o de la rejilla (n x n)</label>
+                    <select class="form-control" id="dimension">
+                      <option>4</option>
+                      <option>6</option>
+                      <option>8</option>
+                      <option>10</option>
+                    </select>
+                </div>
+                <label>Selecciona una vez cada n&uacute;mero</label>
 
-            <div class="row">
-				<div class="col-sm-3">
-					<button id="rotarI">rotar <i class="fa fa-rotate-left"></i></button>
-				</div>
-            	
-            	<div class="col-sm-6">
-            		<table>
-    	            	<tbody id="rejilla">
-    	            
-    	            	</tbody>
-		            </table>
-            	</div>
-            	
-    	        <div class="col-sm-3">
-					<button id="rotarD">rotar <i class="fa fa-rotate-right"></i></button>
-    	       	</div>
-            </div>    
-            
-            <div class="row">
-				<div class="content">
-					<div class="col-sm-3"></div>
-					<div class="col-sm-6">
-						<button id="mensaje">Escribir mensaje <i class="fa fa-file-text-o"></i></button>
-					</div>
-					<div class="col-sm-3"></div>
-				</div>
-			</div>
-            <div class="key">
-                <label>Llave</label>
-                <pre></pre>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <table>
+                            <tbody id="rejilla">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>    
+                <div class="key">
+                    <label>Llave</label>
+                    <pre></pre>
+                </div>
             </div>
-        </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <legend>
+                <h3>Cifra tu mensaje</h3>
+            </legend>
+            <div class="content">
+               <h3>Escribe una letra del mensaje en cada espacio, de izquierda a derecha, de arriba a abajo, sin espacios y sin puntuaci&oacute;n</h3>
+                <div class="col-sm-6">
+                    <button id="mensaje">Escribir mensaje <i class="fa fa-file-text-o"></i></button>
+                </div>
+            </div><br>
+            <div class="row">
+               <div class="col-sm-3" align='center'>
+                    <button id="rotarI">rotar <i class="fa fa-rotate-left"></i></button>
+                </div>
+                <table class="col-sm-4">
+                    <tbody id="rejilla-mensaje" align="center">
+
+                    </tbody>
+                </table>
+                <div class="col-sm-3" align="right" align='center'>
+                    <button id="rotarD">rotar <i class="fa fa-rotate-right"></i></button>
+                </div>
+            </div>
+        </fieldset>
     </div>
 </div>
 

@@ -160,7 +160,6 @@ function crearTablaCifrado() {
     $('#cifrado').html('');
     var tabla = $("#rejilla").children();
 	var trow, tcol;
-	var lbl;
     var etrow, etcol;
 	
 	for( var i = 1; i <= tabla.length; i++ ) {
@@ -173,8 +172,6 @@ function crearTablaCifrado() {
             var id = tcol[j].getAttribute('data-id');
             etcol = document.createElement('td');
             etcol.setAttribute('data-id', id);
-			lbl = document.createElement("label");
-			etcol.append( lbl );
 			
             etrow.appendChild(etcol);
             $('#cifrado').append(etrow);
@@ -182,7 +179,31 @@ function crearTablaCifrado() {
 	}
 }
 
-
+$("#finalizar").click( function() {
+	var tabla = $("#cifrado").children();
+	var trow, tcol;
+	var car;
+	
+	alert("POS SIS ENTRA");
+	/*CONTINUAR EL RELLENADO DE LA TABLA  */
+	for( var i = 1; i <= tabla.length; i++ ) {
+		trow = $("#c" + i ).children();
+		tcol = trow.toArray();
+		
+		for( var j = 0; j < tcol.length; j++ ) {
+			if( tcol[j].innerHTML.match( /[a-zA-Z]/g ) === null ) {
+				while( 1 ) {
+					car = String.fromCharCode( Math.floor( Math.random() * 122 ) );
+					if( car.match( /[a-zA-Z]/g ) !== null )  {
+						break;
+					}
+				}
+				
+				tcol[j].innerHTML = car;
+			}
+		}
+	}
+});
 
 
 

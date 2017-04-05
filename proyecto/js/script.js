@@ -129,6 +129,7 @@ $("#mensaje").click( function() {
 				inp.setAttribute("type", "text");
 				inp.setAttribute("class", "X");
 				inp.setAttribute("style", "width: 100%; height:33px; margin: 0 0 0 0;");
+                inp.setAttribute("maxlength", '1');
 				etcol.appendChild( inp );
 			}
             etrow.appendChild(etcol);

@@ -100,9 +100,7 @@
 			</div>
 			
 			<div class="row">
-            	<div class="col-sm-3" align='center'>
-            		<button id="rotarDC">rotar <i class="fa fa-rotate-right"></i></button>
-            	</div>
+            	<div class="col-sm-3" align='center'>&nbsp;</div>
             	<div class="col-sm-4" align='center'>
             		<table id="tdes">
             			<tbody id="descifrado" align="center" >

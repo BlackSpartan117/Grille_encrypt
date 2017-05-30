@@ -97,6 +97,7 @@
             </div>
             
             <div class="row">
+            	<label>Texto cifrado</label>
 				<div id= "texto-cifrado">
 					
 				</div>
@@ -108,27 +109,31 @@
             <legend>
                 <h3>Descifra tu mensaje</h3>
             </legend>
-            <div class="content">
-               <h3>Lee las letras de izquierda a derecha y de arriba a abajo para encontrar el mensaje cifrado. De ser necesario rota la rejilla a la derecha</h3>
-                <div class="col-sm-6">
-                    <button id="mensaje">Descifrar mensaje <i class="fa fa-file-text-o"></i></button>
-                </div>
-            </div><br>
+            <div class="row">
+		       <h3>Lee las letras de izquierda a derecha y de arriba a abajo para encontrar el mensaje cifrado. 
+		       		De ser necesario rota la rejilla a la derecha</h3>
+		        <div class="col-sm-6">
+		        	<input type="text" id="textoCifrado" placeholder="cadena cifrada"/>
+					<input type="text" id="cadenaOX" placeholder="cadena de oxoxo"/>
+		            <button id="descif-mensajebtn">Descifrar mensaje <i class="fa fa-file-text-o"></i></button>
+		        </div>
+		        <div class="col-sm-3">&nbsp;</div>
+		        <div class="col-sm-3">&nbsp;</div>
+			</div>
+			
+			<div class="row">&nbsp;</div>
+			
 			<div class="row">
-            	<div class="col-sm-3" align='center'>
-            		<button id="rotarDC">rotar <i class="fa fa-rotate-right"></i></button>
-            	</div>
-            	<div class="col-sm-4" align='center'>
-            		<table id="tdes">
-            			<tbody id="descifrado" align="center" >
-            				
-            			</tbody>
-            		</table>
-            	</div>
-            	<div class="col-sm-3" align='center'>
-            		<button id="des">descifrar <i class="fa fa-file-text-o"></i></button>
-            	</div>
-            </div>
+				<div class="col-sm-3" align='center' id="divTablaDecifrado" style="display: none">
+					<button id="rotarDC">rotar <i class="fa fa-rotate-right"></i></button>
+				</div>
+				<div class="col-sm-3" align='center'>
+					<table id="tdes">
+						
+					</table>
+				</div>
+				<div class="col-sm-6">&nbsp;</div>
+			</div>
         </fieldset>
     </div>
 </div>

@@ -5,20 +5,38 @@ new APP.fleissner(".key.grille");
 /*Funcion para dibujar la rejilla dado el tamanio*/
 
 function crearRejilla( tam ){
-    var indices = [];
+    var indices = getIndices( tam );
     
-    for(i = 0; i < tam; i++){
-        indices[i] = [];
+    $('#rejilla').html('');
+    
+    for(i = 0; i < tam; i++) {
+        var fila  = $("<tr>", { "id": i+1 } );
+        
         for(j = 0; j < tam; j++){
+            fila.append("<td data-id=" + indices[i][j] + " class=''>" + indices[i][j] + "</td>");
+        }
+        
+        $('#rejilla').append( fila );
+    }
+}
+
+function getIndices( tam ) {
+	var indices = [];
+	var contador;
+    
+    for( i = 0; i < tam; i++ ) {
+        indices[i] = [];
+        for( j = 0; j < tam; j++ ) {
             indices[i][j] = j;
         }
     }
     
-    for(m = 1; m < 5; m++){
+    for( m = 1; m < 5; m++ ) {
         contador = 1;
-        for(i = 0; i < tam/2; i++){
-            for(j = 0; j < tam/2; j++){
-                switch(m){
+        
+        for( i = 0; i < tam/2; i++ ) {
+            for( j = 0; j < tam/2; j++ ) {
+                switch( m ) {
                         case 1:
                             indices[i][j] = contador++;
                         break;
@@ -36,17 +54,7 @@ function crearRejilla( tam ){
         }
     }
     
-    $('#rejilla').html('');
-    
-    for(i = 0; i < tam; i++) {
-        var fila  = $("<tr>", { "id": i+1 } );
-        
-        for(j = 0; j < tam; j++){
-            fila.append("<td data-id=" + indices[i][j] + " class=''>" + indices[i][j] + "</td>");
-        }
-        
-        $('#rejilla').append( fila );
-    }
+    return indices;
 }
 
 /*Evento cuando se cambia el tamanio de la rejilla*/
@@ -205,85 +213,85 @@ $("#finalizar").click( function() {
 			cifrado += tcol[j].innerHTML;
 		}
 		
-		$("#texto-cifrado").html( cifrado );
+		$("#texto-cifrado").html( "<br>" + cifrado );
 	}
 });
 
 
-$("#des").click( function(){
-	var tbody = $("#cifrado");
-	var trow, tcol, trow2, tcol2;
-	var texto = $("#texto-cifrado").text();
-	var cas = $("#rejilla-mensaje").children();
+/*
+*********************
+** DECIFRADO
+*********************
+*/
+
+var tablaMensaje = [];
+$("#descif-mensajebtn").click( function() {
+	var textCipher = $("#textoCifrado").val(); //qLASnHeonnEMlTfaeaUYHLwAnWreyaSBAHyD
+	var cadena = $("#cadenaOX").val(); //oooooXoXooooXooXooooooXooooXooooooXo
+	var lenRow = longitudFila( textCipher.length );
+	var  tbody = $("<tbody>", { "id": "rejilla-descifrado", "align": "center"} );
+	var tr, td;
+	var indices = getIndices( lenRow );
+	var index = 0;
 	
-	tbody.attr("id", "descifrar");
-	$("#descifrado").remove();
+	for( var i = 1; i <= lenRow; i++ ) {
+		tr = $("<tr>", { "id" : "d" + i } );
+		
+		for( var j = 1; j <= lenRow; j++, index++ ) {
+			td = $("<td>", { "data-id" : indices[i-1][j-1], "pos" : j } );
+			td.append( textCipher.charAt( index ) );
+			
+			if( cadena.charAt( index ) == "X" ) {
+				td.attr("class", "X");
+			} else {
+				td.attr("style", "background-color:#2C3B63;");
+			}
+			
+			tr.append( td );
+		}
+		
+		tbody.append( tr );
+	}
+	
+	$("#divTablaDecifrado").attr("style", "");
+	$("#tdes").find("tbody").remove();
 	$("#tdes").append( tbody );
 	
-	for( var i = 1; i <= cas.length; i++ ) {
-		trow = $("#e" + i ).children();
-		trow2 = $("#c" + i ).children();
-		
-		tcol = trow.toArray();
-		tcol2 = trow2.toArray();
-		
-		for( var j = 0, index = 0; j < tcol.length; j++, index++ ) {
-			if( tcol[j].childElementCount == 0 ) {
-				tcol2[j].setAttribute('style', 'background-color:#2C3B63;');
-			} else {
-				tcol2[j].setAttribute('style', '');
-				
-			}
-		}
-	}
-	
 });
 
+function longitudFila( tamFila ) {
+	var i = 1;
+	
+	while( ( i * i ) != tamFila ) 
+		i++;
+	
+	return i;
+}
+
 $("#rotarDC").click( function() {
-	var tabla = $("#descifrar").children(); /* Retorna los primeros hijos de la etiqueta tbody */
+	var tabla = $("#rejilla-descifrado").children(); /* Retorna los primeros hijos de la etiqueta tbody */
 	var trow, tcol, fila;
-	var tbody = $("<tbody>", {"id": "descifrar", "align": "center" } );
+	var tbody = $("<tbody>", {"id": "rejilla-descifrado", "align": "center" } );
 	
 	for( var j = 0, index = 1; j < tabla.length; j++, index++ ) {
-		fila = $("<tr>" );
+		fila = $("<tr>", { "id": "d" + index } );
 		
 		for( var i = tabla.length, pos = 1; i > 0; i--, pos++ ) {
-			trow = $("#c" + i ).children();
+			trow = $("#d" + i ).children();
 			tcol = trow.toArray();
 			
-			fila.append("<td style='" + tcol[j].getAttribute("style") + "'>" + tcol[j].innerHTML + "</td>");
+			fila.append("<td data-id='" + tcol[j].getAttribute("data-id") + 
+			"' " + "pos = '" +  pos + "' style='" + tcol[j].getAttribute("style") + "'>" + tcol[j].innerHTML + "</td>");
 		}
 		
 		tbody.append( fila );
 	}
 	
-	var tabs = $("#descifrar").parent();
-	$("#descifrar").remove();
+	var tabs = $("#rejilla-descifrado").parent();
+	$("#rejilla-descifrado").remove();
 	tabs.append( tbody );
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+} );
 
 
 
